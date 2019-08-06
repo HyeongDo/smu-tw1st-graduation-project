@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 public class RcvAdapter extends RecyclerView.Adapter<RcvAdapter.ViewHolder> {
-
+//test
      private ArrayList<Data> mlist = null;
 //commit
      public class ViewHolder extends RecyclerView.ViewHolder{
