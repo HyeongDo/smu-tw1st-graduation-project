@@ -1,6 +1,6 @@
 package com.smu.tw1st;
 
-public class Places {
+public class PlaceData {
     private String PlaceId;
     private String PlaceName;
     private String CountryId;
@@ -8,7 +8,7 @@ public class Places {
     private String CityId;
     private String CountryName;
 
-    public Places(String placeId, String placeName, String countryId, String regionId, String cityId, String countryName) {
+    public PlaceData(String placeId, String placeName, String countryId, String regionId, String cityId, String countryName) {
         PlaceId = placeId;
         PlaceName = placeName;
         CountryId = countryId;

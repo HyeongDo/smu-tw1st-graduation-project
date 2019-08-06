@@ -1,137 +1,1 @@
-package com.smu.tw1st;
-
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.os.Bundle;
-import android.util.Log;
-import android.widget.TextView;
-
-import java.io.IOException;
-import java.util.List;
-
-import okhttp3.Interceptor;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
-
-public class MainActivity extends AppCompatActivity {
-    private int mYear;
-    private int mMonth;
-    private int mDayOnMonth;
-    private String dateCompareOut;
-    private String dateCompareIn;
-
-    TextView editOutDate;
-    TextView editInDate;
-    TextView textView2;
-
-    String TAG = MainActivity.class.getName();
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        editInDate = (TextView) findViewById(R.id.editInDate);
-        editOutDate = (TextView) findViewById(R.id.editOutDate);
-        textView2 = (TextView) findViewById(R.id.textView2);
-
-        OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
-        httpClient.addInterceptor(new Interceptor() {
-            @Override
-            public okhttp3.Response intercept(Chain chain) throws IOException {
-                Request original = chain.request();
-                Request request = original.newBuilder()
-                        //.header("X-RapidAPI-Host","skyscanner-skyscanner-flight-search-v1.p.rapidapi.com")
-                        .header("X-RapidAPI-Key","a39470e17emshbe92f4d0d6870d0p187877jsnbd6d7f919411")
-                        .method(original.method(),original.body())
-                        .build();
-                return chain.proceed(request);
-            }
-        });
-
-        OkHttpClient client = httpClient.build();
-
-
-        final Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com")
-                .addConverterFactory(GsonConverterFactory.create())
-                .client(client)
-                .build();
-
-        RetrofitService retrofitService = retrofit.create(RetrofitService.class);
-
-        Call<ListPlace> listPlaceCall = retrofitService.getPlaces("a39470e17emshbe92f4d0d6870d0p187877jsnbd6d7f919411","서울");
-        listPlaceCall.enqueue(new Callback<ListPlace>() {
-            @Override
-            public void onResponse(Call<ListPlace> call, Response<ListPlace> response) {
-                Log.d(TAG,"onResponse:"+response);
-            }
-
-            @Override
-            public void onFailure(Call<ListPlace> call, Throwable t) {
-                Log.d(TAG,"onFailure:"+t.getLocalizedMessage());
-            }
-        });
-
-    }
-
-/*
-    public void outdateClicked(View view) {
-        datePicker();
-        dateCompareOut = mYear + "-" + mMonth + "-" + mDayOnMonth;
-        editInDate = (TextView) findViewById(R.id.editInDate);
-        editOutDate.setText(dateCompareOut);
-
-    }
-
-    public void indateClicked(View view) {
-        datePicker();
-        dateCompareIn = mYear + "-" + mMonth + "-" + mDayOnMonth;
-        int tempIn = 0;
-        int tempOut = 0;
-        if (dateCompareIn != null && dateCompareOut != null) {
-            tempIn = Integer.parseInt(dateCompareIn);
-            tempOut = Integer.parseInt(dateCompareOut);
-        }
-        if (tempIn > tempOut) {
-            editInDate = (TextView) findViewById(R.id.editInDate);
-            editInDate.setText(dateCompareIn);
-        } else {
-            Toast.makeText(getApplicationContext(), "출발지보다 큰 날짜를 선택해주세요.", Toast.LENGTH_LONG).show();
-        }
-    }
-
-    public void datePicker() {
-        Calendar pickedData = Calendar.getInstance();
-        Calendar minDate = Calendar.getInstance();
-        Calendar maxDate = Calendar.getInstance();
-
-        pickedData.set(2019, 8 - 1, 1);
-
-        DatePickerDialog datePickerDialog = new DatePickerDialog(
-                MainActivity.this,
-                new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker datePicker, int year, int month, int dayOfMonth) {
-                        mYear = year;
-                        mMonth = month;
-                        mDayOnMonth = dayOfMonth;
-                    }
-                },
-                pickedData.get(Calendar.YEAR),
-                pickedData.get(Calendar.MONTH),
-                pickedData.get(Calendar.DATE)
-        );
-        minDate.set(2019, 8 - 1, 1);
-        datePickerDialog.getDatePicker().setMinDate(minDate.getTime().getTime());
-        maxDate.set(2019, 12 - 1, 31);
-        datePickerDialog.getDatePicker().setMaxDate(maxDate.getTimeInMillis());
-
-        datePickerDialog.show();
-    }
-*/
-}
+package com.smu.tw1st;import androidx.appcompat.app.AlertDialog;import androidx.appcompat.app.AppCompatActivity;import androidx.recyclerview.widget.LinearLayoutManager;import androidx.recyclerview.widget.RecyclerView;import android.app.DatePickerDialog;import android.os.Bundle;import android.util.Log;import android.view.View;import android.widget.DatePicker;import android.widget.TextView;import android.widget.Toast;import java.util.ArrayList;import java.util.Calendar;import retrofit2.Call;import retrofit2.Callback;import retrofit2.Response;import retrofit2.Retrofit;import retrofit2.converter.gson.GsonConverterFactory;public class MainActivity extends AppCompatActivity {    private int startYear;    private int startMonth;    private int startDay;    private int endYear;    private int endMonth;    private int endDay;    RecyclerView recyclerView;    RecyclerView.LayoutManager layoutManager;    private TextView tvCalendarOutDate;    private TextView tvCalendarIndate;    private String TAG = MainActivity.class.getName();    @Override    protected void onCreate(Bundle savedInstanceState) {        super.onCreate(savedInstanceState);        setContentView(R.layout.activity_main);        init();        getData();    }    public void init(){        tvCalendarOutDate = findViewById(R.id.tvCalendarOutDate);        tvCalendarIndate = findViewById(R.id.tvCalendarInDate);        rcvManager();    }    public void rcvManager(){        recyclerView = findViewById(R.id.rcvResult);        layoutManager = new LinearLayoutManager(this);        recyclerView.setLayoutManager(layoutManager);        ArrayList<Data> data = new ArrayList<>();        data.add(new Data("카약",R.drawable.ic_launcher_background,"36000원"));        RcvAdapter rcvAdapter = new RcvAdapter(data);        recyclerView.setAdapter(rcvAdapter);    }    public void calendarOutDate(View view){        calenderOutDialog();    }    public void calendarInDate(View view){        calenderInDialog();    }    public void calenderOutDialog(){        Calendar calendar = Calendar.getInstance();        DatePickerDialog.OnDateSetListener dateSetListener =                new DatePickerDialog.OnDateSetListener() {                    @Override                    public void onDateSet(DatePicker datePicker, int Year, int monthOfYear, int dayOfMonth) {                        String strDate = (Year)+"년";                        strDate += (monthOfYear+1)+"월";                        strDate += (dayOfMonth) + "일";                        Toast.makeText(getApplicationContext(),strDate,Toast.LENGTH_SHORT).show();                        tvCalendarOutDate.setText(strDate);                    }                };        DatePickerDialog datePickerDialog = new DatePickerDialog(this,                dateSetListener,calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),calendar.get(Calendar.DAY_OF_MONTH));        startYear = calendar.get(Calendar.YEAR);        startMonth = calendar.get(Calendar.MONTH);        startDay = calendar.get(Calendar.DAY_OF_MONTH);        datePickerDialog.show();    }    public void calenderInDialog(){        Calendar calendar = Calendar.getInstance();        DatePickerDialog.OnDateSetListener dateSetListener =                new DatePickerDialog.OnDateSetListener() {                    @Override                    public void onDateSet(DatePicker datePicker, int Year, int monthOfYear, int dayOfMonth) {                        String strDate = (Year)+"년";                        strDate += (monthOfYear+1)+"월";                        strDate += (dayOfMonth) + "일";                        Toast.makeText(getApplicationContext(),strDate,Toast.LENGTH_SHORT).show();                        tvCalendarIndate.setText(strDate);                    }                };        DatePickerDialog datePickerDialog = new DatePickerDialog(this,                dateSetListener,calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),calendar.get(Calendar.DAY_OF_MONTH));        endYear = calendar.get(Calendar.YEAR);        endMonth = calendar.get(Calendar.MONTH);        endDay = calendar.get(Calendar.DAY_OF_MONTH);        datePickerDialog.show();    }    public void getData(){                        Retrofit retrofit = new Retrofit.Builder()                                .baseUrl("https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com")                                .addConverterFactory(GsonConverterFactory.create())                                .build();                        RetrofitService service = retrofit.create(RetrofitService.class);                        Call <ListPlace> call = service.getCityName("도쿄");                        call.enqueue(new Callback<ListPlace>() {                            @Override                            public void onResponse(Call<ListPlace> call, Response<ListPlace> response) {                                try {                                    ListPlace placeData = response.body();                                    Log.d(TAG,"통신성공결과 : "+placeData.getPlaces().get(1).getCountryId());                                }catch (Exception e){                    Log.d("onResponse","통신됐지만 Error ");                    e.printStackTrace();                }            }            @Override            public void onFailure(Call<ListPlace> call, Throwable t) {                Log.d(TAG,"통신실패");            }        });    }}

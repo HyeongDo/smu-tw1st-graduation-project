@@ -4,115 +4,76 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/gray"
     tools:context=".MainActivity">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="160dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/avatars[2]" />
-
     <TextView
-        android:id="@+id/textOutDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:text="출발날짜"
-        android:textColor="@android:color/darker_gray"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
-
-    <TextView
-        android:id="@+id/textInDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="108dp"
-        android:text="도착날짜"
-        android:textColor="@android:color/darker_gray"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
-
-    <TextView
-        android:id="@+id/editInDate"
+        android:id="@+id/tvCalendarInDate"
         android:layout_width="140dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="8dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
+        android:background="@color/white"
         android:ems="10"
         android:gravity="center"
-        android:inputType="textPersonName"
+        android:inputType="number"
+        android:onClick="calendarInDate"
         android:text="도착날짜선택"
         android:textColor="@android:color/background_dark"
-        android:textSize="24sp"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/textInDate"
-        app:layout_constraintTop_toBottomOf="@+id/textInDate" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/editOutDate"
+        android:id="@+id/tvCalendarOutDate"
         android:layout_width="140dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="8dp"
-        android:ems="10"
-        android:gravity="center"
-        android:inputType="textPersonName"
-        android:text="출발날짜선택"
-        android:textColor="@android:color/background_dark"
-        android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInDate" />
-
-    <AutoCompleteTextView
-        android:id="@+id/textOutCity"
-        android:layout_width="140dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="16dp"
-        android:text="출발도시"
-        android:textSize="28sp"
-        app:layout_constraintStart_toStartOf="@+id/editOutDate"
-        app:layout_constraintTop_toBottomOf="@+id/editOutDate" />
-
-    <AutoCompleteTextView
-        android:id="@+id/textInCity"
-        android:layout_width="140dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="16dp"
-        android:text="도착도시"
-        android:textSize="28sp"
-        app:layout_constraintStart_toStartOf="@+id/editInDate"
-        app:layout_constraintTop_toBottomOf="@+id/editInDate" />
-
-    <ScrollView
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:background="@color/white"
+        android:ems="10"
+        android:gravity="center"
+        android:inputType="number"
+        android:onClick="calendarOutDate"
+        android:text="출발날짜선택"
+        android:textColor="@android:color/background_dark"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <AutoCompleteTextView
+        android:id="@+id/actvOutCity"
+        android:layout_width="140dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:background="@color/white"
+        android:text="출발도시"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/tvCalendarOutDate"
+        app:layout_constraintTop_toBottomOf="@+id/tvCalendarOutDate" />
+
+    <AutoCompleteTextView
+        android:id="@+id/actvInCity"
+        android:layout_width="140dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:background="@color/white"
+        android:text="도착도시"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/tvCalendarInDate"
+        app:layout_constraintTop_toBottomOf="@+id/tvCalendarInDate" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcvResult"
+        android:layout_width="395dp"
+        android:layout_height="524dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="32dp"
+        android:layout_marginEnd="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textOutCity">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="TextView" />
-        </LinearLayout>
-    </ScrollView>
+        app:layout_constraintTop_toBottomOf="@+id/actvInCity" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
