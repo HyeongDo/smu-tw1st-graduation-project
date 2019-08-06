@@ -1,19 +1,19 @@
 package com.smu.tw1st;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class ListPlace {
-    private Places places;
+    private ArrayList<PlaceData> Places;
 
-    public ListPlace(Places places) {
-        this.places = places;
+    public ListPlace(ArrayList<PlaceData> Places) {
+        this.Places = Places;
     }
 
-    public Places getPlaces() {
-        return places;
+    public ArrayList<PlaceData> getPlaces() {
+        return Places;
     }
 
-    public void setPlaces(Places places) {
-        this.places = places;
+    public void setPlaces(ArrayList<PlaceData> Places) {
+        this.Places = Places;
     }
 }
