@@ -1,5 +1,4 @@
 package com.smu.tw1st;
-import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

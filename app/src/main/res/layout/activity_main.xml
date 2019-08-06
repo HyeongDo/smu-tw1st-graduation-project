@@ -49,6 +49,8 @@
         android:gravity="center"
         android:background="@color/white"
         android:text="출발도시"
+        android:completionThreshold="1"
+        android:privateImeOptions="defaultInputmode=korean"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="@+id/tvCalendarOutDate"
         app:layout_constraintTop_toBottomOf="@+id/tvCalendarOutDate" />
@@ -61,6 +63,8 @@
         android:gravity="center"
         android:background="@color/white"
         android:text="도착도시"
+        android:completionThreshold="1"
+        android:privateImeOptions="defaultInputmode=korean"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="@+id/tvCalendarInDate"
         app:layout_constraintTop_toBottomOf="@+id/tvCalendarInDate" />
