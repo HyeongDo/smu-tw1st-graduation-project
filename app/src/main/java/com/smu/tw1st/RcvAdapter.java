@@ -14,6 +14,15 @@ import java.util.ArrayList;
 public class RcvAdapter extends RecyclerView.Adapter<RcvAdapter.ViewHolder> {
 
      private ArrayList<Data> mlist = null;
+     private RcvClickListener mListener;
+
+     public interface RcvClickListener{
+         void onItemClicked(int position);
+     }
+
+     public void setOnClickListener(RcvClickListener listener){
+         mListener = listener;
+     }
 
      public class ViewHolder extends RecyclerView.ViewHolder{
          TextView tvName;
@@ -45,13 +54,22 @@ public class RcvAdapter extends RecyclerView.Adapter<RcvAdapter.ViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RcvAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RcvAdapter.ViewHolder holder, final int position) {
 
          ViewHolder viewHolder = holder;
 
          viewHolder.ivIcon.setBackgroundResource(mlist.get(position).getIcon());
          viewHolder.tvName.setText(mlist.get(position).getName());
          viewHolder.tvMoney.setText(mlist.get(position).getMoney());
+
+         if(mListener != null){
+             holder.itemView.setOnClickListener(new View.OnClickListener() {
+                 @Override
+                 public void onClick(View view) {
+                     mListener.onItemClicked(position);
+                 }
+             });
+         }
     }
 
     @Override
