@@ -58,7 +58,7 @@ public class RcvAdapter extends RecyclerView.Adapter<RcvAdapter.ViewHolder> {
 
          ViewHolder viewHolder = holder;
 
-         viewHolder.ivIcon.setBackgroundResource(mlist.get(position).getIcon());
+         viewHolder.ivIcon.setImageResource(mlist.get(position).getIcon());
          viewHolder.tvName.setText(mlist.get(position).getName());
          viewHolder.tvMoney.setText(mlist.get(position).getMoney());
 
