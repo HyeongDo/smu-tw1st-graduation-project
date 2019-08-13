@@ -117,6 +117,7 @@
                     android:layout_marginEnd="16dp"
                     android:layout_marginBottom="8dp"
                     android:background="@drawable/btn_style"
+                    android:onClick="searchClicked"
                     android:text="검색하기"
                     android:textSize="16sp"
                     android:textStyle="bold"

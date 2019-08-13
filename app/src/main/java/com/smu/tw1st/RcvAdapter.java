@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 public class RcvAdapter extends RecyclerView.Adapter<RcvAdapter.ViewHolder> {
-//test
+
      private ArrayList<Data> mlist = null;
 
      public class ViewHolder extends RecyclerView.ViewHolder{
@@ -47,7 +47,7 @@ public class RcvAdapter extends RecyclerView.Adapter<RcvAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull RcvAdapter.ViewHolder holder, int position) {
 
-         ViewHolder viewHolder = (ViewHolder) holder;
+         ViewHolder viewHolder = holder;
 
          viewHolder.ivIcon.setBackgroundResource(mlist.get(position).getIcon());
          viewHolder.tvName.setText(mlist.get(position).getName());
