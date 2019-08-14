@@ -12,7 +12,7 @@ import java.net.URL;
 
 public class ElevenTask extends AsyncTask<String,String, String> {
 
-    String clientKey = "#########################";;
+    String clientKey = "#########################";
     private String str, receiveMsg;
     private final String ID = "########";
 

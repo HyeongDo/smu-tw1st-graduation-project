@@ -11,7 +11,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 public class SkyTask  extends AsyncTask{
 
-    String clientKey = "#########################";;
+    String clientKey = "#########################";
     private String str, receiveMsg;
     private final String ID = "########";
     String getP;
