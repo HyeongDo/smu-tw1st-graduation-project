@@ -13,9 +13,11 @@ import androidx.appcompat.app.AppCompatDialog;
 public class LoadApplication extends Application {
     private static LoadApplication loadApplication;
     AppCompatDialog progressDialog;
+
     public static LoadApplication getInstance() {
         return loadApplication;
     }
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -36,7 +38,7 @@ public class LoadApplication extends Application {
             progressDialog.setContentView(R.layout.custom_dialog);
             progressDialog.show();
         }
-        final ImageView img_loading_frame =  progressDialog.findViewById(R.id.iv_frame_loading);
+        final ImageView img_loading_frame = progressDialog.findViewById(R.id.iv_frame_loading);
         final AnimationDrawable frameAnimation = (AnimationDrawable) img_loading_frame.getBackground();
         img_loading_frame.post(new Runnable() {
             @Override
