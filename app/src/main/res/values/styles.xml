@@ -10,5 +10,8 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
-
+    <!-- intro theme. -->
+    <style name="IntroTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowBackground">@drawable/background_intro</item>
+    </style>
 </resources>
