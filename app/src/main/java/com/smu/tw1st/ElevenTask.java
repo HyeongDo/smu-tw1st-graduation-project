@@ -1,5 +1,6 @@
 package com.smu.tw1st;
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -15,12 +16,27 @@ public class ElevenTask extends AsyncTask<String,String, String> {
     String clientKey = "#########################";
     private String str, receiveMsg;
     private final String ID = "########";
+    private Context mContext = null;
+
+    public ElevenTask(Context mContext) {
+        this.mContext = mContext;
+    }
 
     @Override
     protected String doInBackground(String... params) {
         URL url = null;
+        String eDate,sDate,sPlace,ePlace;
+        sDate = ((MainActivity) mContext).getStartDate();
+        eDate = ((MainActivity) mContext).getEndDate();
+        sPlace=((MainActivity) mContext).getInPlaceId();
+        ePlace=((MainActivity) mContext).getOutPlaceId();
+        sPlace = sPlace.substring(0,sPlace.indexOf("-"));
+        ePlace = ePlace.substring(0,ePlace.indexOf("-"));
         try {
-            url = new URL("https://wpmesavail-staging.whypaymore.co.kr/flt/intl/fare-deals/ep?tripType=2&depLocCodes=SEL&depLocNames=서울(모든공항)&arrLocCodes=NRT&arrLocNames=도쿄(나리타)&dates=2019-08-20&dates=2019-08-23&seatCls=Y&adtCnt=1&appId=v2&searchSource=P&cabinCls=Y&opt=1&maxCxrDealLen=10");
+            url = new URL("https://wpmesavail-staging.whypaymore.co.kr/flt/intl/fare-deals/ep?tripType=2"
+                    +"&depLocCodes="+sPlace+"&depLocNames="+sPlace
+                    +"&arrLocCodes="+ePlace+"&arrLocNames="+ePlace
+                    +"&dates="+sDate+"&dates="+eDate+"&seatCls=Y&adtCnt=1&appId=v2&searchSource=P&cabinCls=Y&opt=1&maxCxrDealLen=10");
 
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("GET");

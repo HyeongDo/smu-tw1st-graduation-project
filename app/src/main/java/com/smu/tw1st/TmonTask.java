@@ -1,5 +1,7 @@
 package com.smu.tw1st;
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -15,17 +17,40 @@ public class TmonTask extends AsyncTask<String,String, String> {
     String clientKey = "#########################";
     private String str, receiveMsg;
     private final String ID = "########";
+    private Context mContext = null;
+
+    public TmonTask(Context context) {
+        this.mContext = context;
+
+    }
 
     @Override
     protected String doInBackground(String... params) {
         URL url = null;
+
+
+        String eDate,sDate,sPlace,ePlace;
+        sDate = ((MainActivity) mContext).getStartDate();
+        eDate = ((MainActivity) mContext).getEndDate();
+        sPlace=((MainActivity) mContext).getInPlaceId();
+        ePlace=((MainActivity) mContext).getOutPlaceId();
+        sPlace = sPlace.substring(0,sPlace.indexOf("-"));
+        ePlace = ePlace.substring(0,ePlace.indexOf("-"));
+        int a;
         try {
-            url = new URL("http://tour.tmon.co.kr/api/direct/v1/airtktcommonapi/api/recommend/getPeriodLowPrice?tripType=RT&depCd=SEL&arrCd=TYO&depDd=2019-09-13&arrDd=2019-09-17&lowestPrice=999999");
+
+            url = new URL(
+                    "http://tour.tmon.co.kr/api/direct/v1/airtktcommonapi/api/recommend/getPeriodLowPrice?tripType=RT"+
+                            "&depCd="+sPlace+
+                            "&arrCd="+ePlace +
+                            "&depDd="+sDate+
+                            "&arrDd="+eDate+
+                            "&lowestPrice=999999");
 
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8");
             conn.setRequestProperty("x-waple-authorization", clientKey);
-
+            a = conn.getResponseCode();
             if (conn.getResponseCode() == conn.HTTP_OK) {
                 InputStreamReader tmp = new InputStreamReader(conn.getInputStream(), "UTF-8");
                 BufferedReader reader = new BufferedReader(tmp);
