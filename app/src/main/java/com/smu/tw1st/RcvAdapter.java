@@ -13,44 +13,44 @@ import java.util.ArrayList;
 
 public class RcvAdapter extends RecyclerView.Adapter<RcvAdapter.ViewHolder> {
 
-     private ArrayList<Data> mlist = null;
-     private RcvClickListener mListener;
+    private ArrayList<Data> mlist = null;
+    private RcvClickListener mListener;
 
-     public interface RcvClickListener{
-         void onItemClicked(int position);
-     }
+    public interface RcvClickListener {
+        void onItemClicked(int position);
+    }
 
 
-     public class ViewHolder extends RecyclerView.ViewHolder{
-         TextView tvName;
-         TextView tvMoney;
-         ImageView ivIcon;
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        TextView tvName;
+        TextView tvMoney;
+        ImageView ivIcon;
 
-         ViewHolder(View itemView){
-             super(itemView);
+        ViewHolder(View itemView) {
+            super(itemView);
 
-             tvName = itemView.findViewById(R.id.tvIcon);
-             tvMoney = itemView.findViewById(R.id.tvMoney);
-             ivIcon = itemView.findViewById(R.id.ivIcon);
+            tvName = itemView.findViewById(R.id.tvIcon);
+            tvMoney = itemView.findViewById(R.id.tvMoney);
+            ivIcon = itemView.findViewById(R.id.ivIcon);
 
-         }
+        }
 
-         public void setOnClickListener(RcvClickListener listener) {
-             mListener = listener;
-         }
-     }
+        public void setOnClickListener(RcvClickListener listener) {
+            mListener = listener;
+        }
+    }
 
-     public RcvAdapter(ArrayList<Data> list){
-         mlist = list;
-     }
+    public RcvAdapter(ArrayList<Data> list) {
+        mlist = list;
+    }
 
 
     @NonNull
     @Override
     public RcvAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.rcv_result_item,parent,false);
-         return new ViewHolder(view);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.rcv_result_item, parent, false);
+        return new ViewHolder(view);
 
     }
 
@@ -61,14 +61,14 @@ public class RcvAdapter extends RecyclerView.Adapter<RcvAdapter.ViewHolder> {
         holder.tvName.setText(mlist.get(position).getName());
         holder.tvMoney.setText(mlist.get(position).getMoney());
 
-         if(mListener != null){
-             holder.itemView.setOnClickListener(new View.OnClickListener() {
-                 @Override
-                 public void onClick(View view) {
-                     mListener.onItemClicked(position);
-                 }
-             });
-         }
+        if (mListener != null) {
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    mListener.onItemClicked(position);
+                }
+            });
+        }
     }
 
     @Override
