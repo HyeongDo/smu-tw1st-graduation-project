@@ -37,9 +37,12 @@ public class RcvAdapter extends RecyclerView.Adapter<RcvAdapter.ViewHolder> {
              ivIcon = itemView.findViewById(R.id.ivIcon);
 
          }
+
+         public void setOnClickListener(View.OnClickListener onClickListener) {
+         }
      }
 
-     RcvAdapter(ArrayList<Data> list){
+     public RcvAdapter(ArrayList<Data> list){
          mlist = list;
      }
 
@@ -58,12 +61,12 @@ public class RcvAdapter extends RecyclerView.Adapter<RcvAdapter.ViewHolder> {
 
          ViewHolder viewHolder = holder;
 
-         viewHolder.ivIcon.setImageResource(mlist.get(position).getIcon());
-         viewHolder.tvName.setText(mlist.get(position).getName());
-         viewHolder.tvMoney.setText(mlist.get(position).getMoney());
+        holder.ivIcon.setImageResource(mlist.get(position).getIcon());
+        holder.tvName.setText(mlist.get(position).getName());
+        holder.tvMoney.setText(mlist.get(position).getMoney());
 
          if(mListener != null){
-             holder.itemView.setOnClickListener(new View.OnClickListener() {
+             holder.setOnClickListener(new View.OnClickListener() {
                  @Override
                  public void onClick(View view) {
                      mListener.onItemClicked(position);
