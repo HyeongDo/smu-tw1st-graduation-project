@@ -20,9 +20,6 @@ public class RcvAdapter extends RecyclerView.Adapter<RcvAdapter.ViewHolder> {
          void onItemClicked(int position);
      }
 
-     public void setOnClickListener(RcvClickListener listener){
-         mListener = listener;
-     }
 
      public class ViewHolder extends RecyclerView.ViewHolder{
          TextView tvName;
@@ -38,7 +35,8 @@ public class RcvAdapter extends RecyclerView.Adapter<RcvAdapter.ViewHolder> {
 
          }
 
-         public void setOnClickListener(View.OnClickListener onClickListener) {
+         public void setOnClickListener(RcvClickListener listener) {
+             mListener = listener;
          }
      }
 
@@ -59,14 +57,12 @@ public class RcvAdapter extends RecyclerView.Adapter<RcvAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull RcvAdapter.ViewHolder holder, final int position) {
 
-         ViewHolder viewHolder = holder;
-
         holder.ivIcon.setImageResource(mlist.get(position).getIcon());
         holder.tvName.setText(mlist.get(position).getName());
         holder.tvMoney.setText(mlist.get(position).getMoney());
 
          if(mListener != null){
-             holder.setOnClickListener(new View.OnClickListener() {
+             holder.itemView.setOnClickListener(new View.OnClickListener() {
                  @Override
                  public void onClick(View view) {
                      mListener.onItemClicked(position);
