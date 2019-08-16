@@ -51,7 +51,7 @@ public class SkyTask  extends AsyncTask{
             int cnt = 0;//숫자를 세기위한 변수
             for (Element element : contents) {
                 cnt++;
-                getP= element.text() + "\n";
+                getP= element.text();
                 if (cnt == 1)//10위까지 파싱하므로
                     break;
             }
