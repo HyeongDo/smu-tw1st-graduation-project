@@ -17,7 +17,7 @@ public class RcvAdapter extends RecyclerView.Adapter<RcvAdapter.ViewHolder> {
     private RcvClickListener mListener;
 
     public interface RcvClickListener {
-        void onItemClicked(int position);
+        void onItemClicked(ViewHolder holder, View view, int position);
     }
 
 
@@ -33,9 +33,19 @@ public class RcvAdapter extends RecyclerView.Adapter<RcvAdapter.ViewHolder> {
             tvMoney = itemView.findViewById(R.id.tvMoney);
             ivIcon = itemView.findViewById(R.id.ivIcon);
 
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int position = getAdapterPosition();
+                    if (mListener != null) {
+                        mListener.onItemClicked(ViewHolder.this, view, position);
+                    }
+                }
+            });
         }
 
-        public void setOnClickListener(RcvClickListener listener) {
+
+        public void setOnItemClickListener(RcvClickListener listener) {
             mListener = listener;
         }
     }
@@ -61,15 +71,13 @@ public class RcvAdapter extends RecyclerView.Adapter<RcvAdapter.ViewHolder> {
         holder.tvName.setText(mlist.get(position).getName());
         holder.tvMoney.setText(mlist.get(position).getMoney());
 
-        if (mListener != null) {
-            holder.itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    mListener.onItemClicked(position);
-                }
-            });
-        }
+        holder.setOnItemClickListener(mListener);
     }
+
+    public void setOnClickListener(RcvClickListener listener){
+        mListener = listener;
+    }
+
 
     @Override
     public int getItemCount() {
