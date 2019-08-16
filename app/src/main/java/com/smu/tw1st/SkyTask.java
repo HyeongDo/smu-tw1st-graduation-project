@@ -40,6 +40,7 @@ public class SkyTask  extends AsyncTask{
                 // doc = Jsoup.connect(a).get(); //naver페이지를 불러옴
                 //"https://ko.skyticket.com/international-flights/ia_fare_result_mix.php?select_career_only_flg=&trip_type=2&dep_port0=SEL&arr_port0=LOS&dep_date%5B%5D=2019-09-05&dep_port_name1=도쿄%28NRT%29&dep_port1=NRT&arr_port_name1=서울%28SEL%29&arr_port1=SEL&dep_date%5B%5D=2019-09-09&cabin_class=Y&adt_pax=1&chd_pax=0&inf_pax=0&ssid=85e760f3f7e3e4aed8876dc41cf33d46"
                 doc = Jsoup.connect(a)
+
                         .get();
                 //System.out.println(doc);
 
