@@ -61,8 +61,10 @@ public class ElevenTask extends AsyncTask<String,String, String> {
             }
         } catch (MalformedURLException e) {
             e.printStackTrace();
+            return "0";
         } catch (IOException e) {
             e.printStackTrace();
+            return "0";
         }
 
         return receiveMsg;
