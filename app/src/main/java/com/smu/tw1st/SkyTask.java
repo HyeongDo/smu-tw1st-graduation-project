@@ -49,16 +49,16 @@ public class SkyTask  extends AsyncTask{
                 for (Element element : contents) {
                     cnt++;
                     getP= element.text();
-                    if (cnt == 1)//10위까지 파싱하므로
-                        break;
+                    return getP;
                 }
+                return "0";
 
 
             } catch (IOException e) {
                 e.printStackTrace();
                 return "0";
             }
-        return getP;
+
 
         }
 
