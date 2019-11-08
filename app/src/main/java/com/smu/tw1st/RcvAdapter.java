@@ -74,7 +74,7 @@ public class RcvAdapter extends RecyclerView.Adapter<RcvAdapter.ViewHolder> {
         holder.setOnItemClickListener(mListener);
     }
 
-    public void setOnClickListener(RcvClickListener listener){
+    public void setOnClickListener(RcvClickListener listener) {
         mListener = listener;
     }
 

@@ -17,8 +17,8 @@ public class BroadcastD extends BroadcastReceiver {
         //NotificationManager 안드로이드 상태바에 메세지를 던지기위한 서비스 불러오고
 
 
-         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, new Intent(context, MainActivity.class), PendingIntent.FLAG_UPDATE_CURRENT);
-         Notification.Builder builder = new Notification.Builder(context,"default");
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, new Intent(context, MainActivity.class), PendingIntent.FLAG_UPDATE_CURRENT);
+        Notification.Builder builder = new Notification.Builder(context, "default");
 
         builder.setSmallIcon(R.mipmap.tw1sticon);
         builder.setWhen(System.currentTimeMillis());
@@ -28,12 +28,12 @@ public class BroadcastD extends BroadcastReceiver {
 
         builder.setAutoCancel(true);
 
-        NotificationManager notificationManager = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+        NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             notificationManager.createNotificationChannel(
-                    new NotificationChannel("default","기본채널",NotificationManager.IMPORTANCE_DEFAULT));
+                    new NotificationChannel("default", "기본채널", NotificationManager.IMPORTANCE_DEFAULT));
         }
-        notificationManager.notify(1,builder.build());
+        notificationManager.notify(1, builder.build());
 
     }
 }

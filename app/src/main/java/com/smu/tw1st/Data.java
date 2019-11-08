@@ -7,7 +7,7 @@ public class Data {
     private String money;
     private String url;
 
-    public Data(String name, int icon, String money,String url) {
+    public Data(String name, int icon, String money, String url) {
         this.name = name;
         this.icon = icon;
         this.money = money;

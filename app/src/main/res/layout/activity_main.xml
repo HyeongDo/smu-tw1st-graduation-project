@@ -42,6 +42,7 @@
                     android:background="@drawable/const_layout_style"
                     app:layout_constraintBottom_toTopOf="@+id/btnSearch"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/ivLogo">
 
@@ -53,7 +54,7 @@
                         android:layout_marginEnd="32dp"
                         android:ems="10"
                         android:gravity="center"
-                        android:hint="도착날짜선택"
+                        android:hint="@string/arrival_date"
                         android:inputType="number"
                         android:onClick="calendarInDate"
                         android:textColor="@android:color/background_dark"
@@ -70,7 +71,7 @@
                         android:layout_marginTop="16dp"
                         android:ems="10"
                         android:gravity="center"
-                        android:hint="출발날짜선택"
+                        android:hint="@string/departure_date"
                         android:inputType="number"
                         android:onClick="calendarOutDate"
                         android:textColor="@android:color/background_dark"
@@ -87,7 +88,7 @@
                         android:layout_marginTop="16dp"
                         android:completionThreshold="1"
                         android:gravity="center"
-                        android:hint="출발도시작성"
+                        android:hint="@string/departure_city"
                         android:imeOptions="actionDone"
                         android:privateImeOptions="defaultInputmode=korean"
                         android:textSize="14sp"
@@ -103,7 +104,7 @@
                         android:layout_marginEnd="32dp"
                         android:completionThreshold="1"
                         android:gravity="center"
-                        android:hint="도착도시작성"
+                        android:hint="@string/arrival_city"
                         android:imeOptions="actionDone"
                         android:privateImeOptions="defaultInputmode=korean"
                         android:textSize="14sp"
@@ -122,8 +123,7 @@
                     android:layout_marginEnd="16dp"
                     android:layout_marginBottom="8dp"
                     android:background="@drawable/btn_style"
-                    android:onClick="searchClicked"
-                    android:text="검색하기"
+                    android:text="@string/search"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toTopOf="@+id/rcvResult"
@@ -146,16 +146,5 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
     </ScrollView>
-
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/lottie_loading"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:lottie_fileName="ticket.json" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

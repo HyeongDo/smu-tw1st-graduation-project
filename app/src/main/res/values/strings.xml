@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">TW1ST</string>
+    <string name="departure_date">"출발날짜선택"</string>
+    <string name="arrival_date">"도착날짜선택"</string>
+    <string name="departure_city">"출발도시작성"</string>
+    <string name="arrival_city">"도착도시작성"</string>
+    <string name="search">"검색하기"</string>
 </resources>
