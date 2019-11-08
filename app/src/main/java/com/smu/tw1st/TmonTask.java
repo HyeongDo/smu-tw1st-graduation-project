@@ -1,8 +1,14 @@
 package com.smu.tw1st;
 
+import android.animation.Animator;
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.view.View;
+
+import com.airbnb.lottie.LottieAnimationView;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -13,16 +19,23 @@ import java.net.URL;
 
 public class TmonTask extends AsyncTask<String, String, String> {
 
-    String clientKey = "#########################";
+    private String clientKey = "#########################";
     private String str, receiveMsg;
     private final String ID = "########";
     private Context mContext = null;
+    private CustomDialog dialog;
+
 
     public TmonTask(Context context) {
         this.mContext = context;
 
     }
 
+    @Override
+    protected void onPreExecute() {
+        dialog = new CustomDialog(mContext);
+        dialog.show();
+    }
 
     @Override
     protected String doInBackground(String... params) {
@@ -74,5 +87,9 @@ public class TmonTask extends AsyncTask<String, String, String> {
         }
 
         return receiveMsg;
+    }
+
+    @Override
+    protected void onPostExecute(String s) {
     }
 }

@@ -12,7 +12,7 @@ import androidx.appcompat.app.AppCompatDialog;
 
 public class LoadApplication extends Application {
     private static LoadApplication loadApplication;
-    AppCompatDialog progressDialog;
+    private AppCompatDialog progressDialog;
 
     public static LoadApplication getInstance() {
         return loadApplication;
