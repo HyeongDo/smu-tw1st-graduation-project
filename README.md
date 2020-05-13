@@ -1,1 +1,1 @@
-# smu-tw1st-graduation-project
+# 항공권 최저가 검색 앱 프로젝트 
